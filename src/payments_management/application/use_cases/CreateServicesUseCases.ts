@@ -5,7 +5,7 @@ import { ServiceMapperDTO } from "../mappers/ServicesMapperDTO";
 import { Service } from "../../domain/entities/services";
 
 
-export class CreateServicesUseCases {
+export class CreateServiceUseCases {
     constructor(readonly repostory: ServiceInterface) {}
 
     async execute(req: Request): Promise<BaseResponse> {

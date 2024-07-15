@@ -17,8 +17,8 @@ export class UpdateServicesUseCases {
         let result: Service | null = await this.repostory.update(uuid, domain);
         if (result) {
             let response = ServiceMapperDTO.toResponse(result);
-            return new BaseResponse(response, 'Services has been created in successfully', true, 200);
+            return new BaseResponse(response, 'Services has been updated in successfully', true, 200);
         }
-        return new BaseResponse(null, 'Services not created', false, 404);
+        return new BaseResponse(null, 'Services not updated', false, 404);
     }
 } 
