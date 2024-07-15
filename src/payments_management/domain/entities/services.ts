@@ -11,7 +11,7 @@ export class Service implements ValidatableEntity {
 
     public cost_per_service:number;
 
-    public commision:number;
+    public commission:number;
 
     public cost_total:number;
 
@@ -19,8 +19,8 @@ export class Service implements ValidatableEntity {
         this.uuid = uuidv4();
         this.name=name;
         this.cost_per_service=cost_per_service;
-        this.commision=cost_per_service * this.extra_cost;
-        this.cost_total=cost_per_service + this.commision;
+        this.commission=cost_per_service * this.extra_cost;
+        this.cost_total=cost_per_service + this.commission;
     }
 
     async validate() {
