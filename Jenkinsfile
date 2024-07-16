@@ -6,6 +6,8 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'env-payments', variable: 'ENV_FILE')]) {
                     script {
+                        sh 'ls -ld $WORKSPACE'
+                        sh 'ls -l $WORKSPACE'
                         sh "cp \$ENV_FILE \$WORKSPACE/.env"
                         sh 'cat $WORKSPACE/.env'
                     }
