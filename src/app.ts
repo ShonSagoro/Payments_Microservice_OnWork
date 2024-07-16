@@ -16,16 +16,16 @@ app.use(express.json());
 app.use(rateLimiter);
 
 const HOST:string = process.env.HOST_SERVER || '0.0.0.0';
-const PORT:number  = Number(process.env.PORT_SERVER) || 3002;
+const PORT:number  = Number(process.env.PORT_SERVER) || 3003;
 
 app.use(express.json()); 
 app.use(morgan('dev'))
 setupServiceEndpoints(app);
-setupPaymentEndpoints(app);
+setupPaymentEndpoints(app); 
 let server = null;
 
 async function startServer() {
-    server = app.listen(PORT, HOST, () => {
+    server = app.listen(PORT, HOST, () => { 
         signale.success(`Server is running on http://${HOST}:${PORT}`);
     });
 }

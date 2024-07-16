@@ -9,25 +9,25 @@ import { UpdateServiceRequest } from '../dtos/request/UpdateServicesRequest';
 export class ServiceMapperDTO {
     static toCreateRequest(req: Request): CreateServiceRequest | null {
         const body = req.body;
-        if (!body.name || !body.cost_per_service) {
+        if (!body.name || !body.cost_per_service || !body.currency) {
             return null;
         }
-        return new CreateServiceRequest(body.name, parseFloat(body.cost_per_service));
+        return new CreateServiceRequest(body.name, parseFloat(body.cost_per_service), body.currency);
     }
 
     static toUpdateRequest(req: Request): UpdateServiceRequest | null {
         const body = req.body;
-        if (!body.name || !body.cost_per_service) {
+        if (!body.name || !body.cost_per_service || !body.currency) {
             return null;
         }
-        return new UpdateServiceRequest(body.name, parseFloat(body.cost_per_service));
+        return new UpdateServiceRequest(body.name, parseFloat(body.cost_per_service), body.currency);
     }
 
     static toResponse(domain: Service): ServicesResposnse{
-        return new ServicesResposnse(domain.uuid, domain.name, domain.cost_per_service);
+        return new ServicesResposnse(domain.uuid, domain.name, domain.cost_per_service, domain.currency);
     }
 
     static toDomain(request: CreateServiceRequest): Service {
-        return new Service(request.name, request.cost_per_service);
+        return new Service(request.name, request.cost_per_service, request.currency);
     }
 }

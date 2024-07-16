@@ -2,23 +2,27 @@ import { Request } from 'express';
 import { CreatePaymentRequest } from '../dtos/request/CreatePaymentRequest';
 import { Payment } from '../../domain/entities/payment';
 import { PaymentResposnse } from '../dtos/response/PaymentResponse';
+import { Service } from '../../domain/entities/services';
+import { ServiceMapperDTO } from './ServicesMapperDTO';
 
 
 export class PaymentMapperDTO {
     static toCreateRequest(req: Request): CreatePaymentRequest | null {
         const body = req.body;
-        if (!body.user_uuid || !body.provider_uuid || !body.product_uuid) {
+        if (!body.user_uuid || !body.provider_uuid || !body.service_uuid) {
             return null;
         }
-        return new CreatePaymentRequest(body.user_uuid, body.provider_uuid, body.product_uuid);
+        return new CreatePaymentRequest(body.user_uuid, body.provider_uuid, body.service_uuid);
     }
 
     static toResponse(domain: Payment): PaymentResposnse{
-        return new PaymentResposnse(domain.uuid, domain.user_uuid, domain.provider_uuid, domain.product_uuid);
-    
+       let service_response = ServiceMapperDTO.toResponse(domain.service)
+        return new PaymentResposnse(domain.uuid, domain.user_uuid, domain.provider_uuid, service_response);
     }
 
     static toDomain(request: CreatePaymentRequest): Payment {
-        return new Payment(request.user_uuid, request.provider_uuid, request.product_uuid);
+        let service_default = new Service('default', 0.0, 'MXN')
+        service_default.uuid = request.service_uuid
+        return new Payment(request.user_uuid, request.provider_uuid, service_default);
     }
 }

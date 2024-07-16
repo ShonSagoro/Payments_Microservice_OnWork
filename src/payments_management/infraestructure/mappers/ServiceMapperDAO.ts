@@ -6,7 +6,8 @@ export class ServiceMapperDAO {
     static toDomain(serviceEntity: ServiceEntity): Service {
         let service = new Service(
             serviceEntity.dataValues.name,
-            serviceEntity.dataValues.cost_per_service
+            serviceEntity.dataValues.cost_per_service,
+            serviceEntity.dataValues.currency
         );
         service.uuid = serviceEntity.dataValues.uuid;
         service.commission = serviceEntity.dataValues.commission;
@@ -18,7 +19,9 @@ export class ServiceMapperDAO {
         return ServiceEntity.build({
             uuid: uuid,
             name: update.name,
-            cost_per_service: update.cost_per_service
+            cost_per_service: update.cost_per_service,
+            currency: update.currency
+
         });
     }
 
@@ -27,6 +30,7 @@ export class ServiceMapperDAO {
             uuid: service.uuid,
             name: service.name,
             cost_per_service: service.cost_per_service,
+            currency: service.currency,
             commission: service.commission,
             cost_total: service.cost_total
         });

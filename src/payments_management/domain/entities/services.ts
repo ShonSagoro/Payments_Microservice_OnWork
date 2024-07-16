@@ -9,16 +9,19 @@ export class Service implements ValidatableEntity {
     
     public name:string;
 
+    public currency:string;
+    
     public cost_per_service:number;
 
     public commission:number;
 
     public cost_total:number;
 
-    constructor(name: string, cost_per_service:number){
+    constructor(name: string, cost_per_service:number, currency: string) {
         this.uuid = uuidv4();
         this.name=name;
         this.cost_per_service=cost_per_service;
+        this.currency=currency;
         this.commission=cost_per_service * this.extra_cost;
         this.cost_total=cost_per_service + this.commission;
     }

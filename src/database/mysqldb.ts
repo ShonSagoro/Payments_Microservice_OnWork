@@ -1,6 +1,8 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 import { Signale } from 'signale';
+import ServiceEntity from '../payments_management/infraestructure/daos/servicesEntity';
+import PaymentEntity from '../payments_management/infraestructure/daos/paymentEntity';
 
 dotenv.config();
 

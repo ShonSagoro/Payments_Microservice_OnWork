@@ -1,5 +1,7 @@
+import { Service } from './services';
 import { v4 as uuidv4 } from 'uuid';
 import { ValidatableEntity } from './validations/ValidatableEntity';
+import { StatusEnum } from './enums/StatusEnum';
 
 export class Payment implements ValidatableEntity {
 
@@ -9,13 +11,16 @@ export class Payment implements ValidatableEntity {
 
     public provider_uuid:string;
 
-    public product_uuid:string;
+    public service: Service;
 
-    constructor(user_uuid: string, provider_uuid: string, product_uuid:string){
+    public status: StatusEnum;
+
+    constructor(user_uuid: string, provider_uuid: string, service:Service){
         this.uuid = uuidv4();
         this.user_uuid=user_uuid
         this.provider_uuid=provider_uuid
-        this.product_uuid=product_uuid
+        this.service=service
+        this.status=StatusEnum.PENDING
     }
 
     async validate() {

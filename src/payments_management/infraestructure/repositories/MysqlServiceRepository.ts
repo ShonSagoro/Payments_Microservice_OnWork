@@ -26,7 +26,12 @@ export class MysqlServiceRepository implements ServiceInterface {
 
             const updateData = ServiceMapperDAO.toUpdateEntity(service, uuid);
             return await this.withTransaction(async (transaction: any) => {
-                await ServiceEntity.update(updateData, { where: { uuid }, transaction });
+                
+                await ServiceEntity.update({
+                    name: updateData.name,
+                    cost_per_service: updateData.cost_per_service,
+                    currency: updateData.currency
+                }, { where: { uuid }, transaction });
                 service.uuid = uuid;
                 return service;
             }); //TODO: Fix this

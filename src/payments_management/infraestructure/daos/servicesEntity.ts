@@ -1,9 +1,11 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../../../database/mysqldb';
+import PaymentEntity from './paymentEntity';
 
 class ServiceEntity extends Model {
     public uuid!: string;
     public name!: string;
+    public currency!:string;
     public cost_per_service!: number;
     public commission!: number; // Nota: Corregido de "commision" a "commission" para mantener la consistencia en la nomenclatura
     public cost_total!: number;
@@ -17,6 +19,10 @@ ServiceEntity.init(
             primaryKey: true,
         },
         name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        currency: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -38,5 +44,8 @@ ServiceEntity.init(
         modelName: 'Service',
     }
 );
+
+ServiceEntity.hasMany(PaymentEntity, { foreignKey: 'service_uuid' });
+
 
 export default ServiceEntity;
