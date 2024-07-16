@@ -21,7 +21,6 @@ export class ServiceMapperDAO {
             name: update.name,
             cost_per_service: update.cost_per_service,
             currency: update.currency
-
         });
     }
 

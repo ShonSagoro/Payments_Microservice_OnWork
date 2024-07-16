@@ -45,7 +45,7 @@ ServiceEntity.init(
     }
 );
 
-ServiceEntity.hasMany(PaymentEntity, { foreignKey: 'service_uuid' });
+// 
 
 
 export default ServiceEntity;
