@@ -9,6 +9,8 @@ import { DeletePaymentByUserUUIDController } from '../controllers/DeletePaymentB
 import { DeletePaymentController } from '../controllers/DeletePaymentController';
 import { GetByUuidPaymentController } from '../controllers/GetByUuidPaymentController';
 import { ListPaymentController } from '../controllers/ListPaymentController';
+import { GetPaymentsByUuidUserUseCase } from '../../application/use_cases/GetPaymentsByUuidUserUseCase';
+import { GetPaymentsByUuidUserController } from '../controllers/GetPaymentsByUuidUserController';
 
 const repository = new MysqlPaymentRepository();
 
@@ -17,9 +19,11 @@ export const deletePaymentByUserUUIDUseCase = new DeletePaymentByUserUUIDUseCase
 export const deletePaymentUseCase = new DeletePaymentUseCase(repository);
 export const getByUuidPaymentUseCase = new GetByUuidPaymentUseCase(repository);
 export const listPaymentUseCase = new ListPaymentUseCase(repository);
+export const getPaymentsByUuidUserUseCase = new GetPaymentsByUuidUserUseCase(repository);
 
 export const createPaymentController = new CreatePaymentController(createPaymentUseCases);
 export const deletePaymentByUserUUIDController = new DeletePaymentByUserUUIDController(deletePaymentByUserUUIDUseCase);
 export const deletePaymentController = new DeletePaymentController(deletePaymentUseCase);
 export const getByUuidPaymentController = new GetByUuidPaymentController(getByUuidPaymentUseCase);
 export const listPaymentController = new ListPaymentController(listPaymentUseCase);
+export const getPaymentsByUuidUserController = new GetPaymentsByUuidUserController(getPaymentsByUuidUserUseCase)

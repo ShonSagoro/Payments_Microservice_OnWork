@@ -20,6 +20,8 @@ const PORT:number  = Number(process.env.PORT_SERVER) || 3003;
 
 app.use(express.json()); 
 app.use(morgan('dev'))
+app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']);
+
 setupServiceEndpoints(app);
 setupPaymentEndpoints(app); 
 let server = null;
