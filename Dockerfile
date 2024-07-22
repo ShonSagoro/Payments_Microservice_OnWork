@@ -1,15 +1,15 @@
-FROM node:20
+    FROM node:20
 
-WORKDIR /app
+    WORKDIR /app
 
-COPY package*.json ./
-COPY src ./src
-COPY .env ./
-COPY . .
+    COPY package*.json ./
+    COPY src ./src
+    COPY .env ./
+    COPY . .
 
-RUN npm install
-RUN npm install -g ts-node-dev
+    RUN npm install
+    RUN npm install -g ts-node-dev
 
-EXPOSE 3003
+    EXPOSE 3003
 
-CMD ["npm", "run", "dev"]
+    CMD ["npm", "run", "dev"]

@@ -11,7 +11,9 @@ dotenv.config();
 
 const app = express();
 const signale = new Signale();
-app.use(cors());
+app.use(cors({
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+}));
 app.use(express.json());
 app.use(rateLimiter);
 
