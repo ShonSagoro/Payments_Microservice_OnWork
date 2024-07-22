@@ -21,7 +21,7 @@ export class PaymentMapperDTO {
     }
 
     static toDomain(request: CreatePaymentRequest): Payment {
-        let service_default = new Service('default', 0.0, 'MXN')
+        let service_default = new Service('default', 0.0, 'MXN', "")
         service_default.uuid = request.service_uuid
         return new Payment(request.user_uuid, request.provider_uuid, service_default);
     }

@@ -24,10 +24,13 @@ export class ServiceMapperDTO {
     }
 
     static toResponse(domain: Service): ServicesResposnse{
-        return new ServicesResposnse(domain.uuid, domain.name, domain.cost_per_service, domain.currency);
+        return new ServicesResposnse(domain.uuid, domain.name, domain.cost_per_service, domain.currency, domain.provider_uuid);
     }
 
-    static toDomain(request: CreateServiceRequest): Service {
+    static toDomainCreate(request: CreateServiceRequest): Service {
         return new Service(request.name, request.cost_per_service, request.currency, request.provider_uuid);
+    }
+    static toDomainUpdate(request: UpdateServiceRequest): Service {
+        return new Service(request.name, request.cost_per_service, request.currency, "");
     }
 }

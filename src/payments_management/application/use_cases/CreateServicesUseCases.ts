@@ -13,7 +13,7 @@ export class CreateServiceUseCases {
         if (!createServicesRequest) {
             return new BaseResponse(null, 'Bad request', false, 400);
         }
-        let domain = ServiceMapperDTO.toDomain(createServicesRequest);
+        let domain = ServiceMapperDTO.toDomainCreate(createServicesRequest);
         let result: Service | null = await this.repostory.create(domain);
         if (result) {
             let response = ServiceMapperDTO.toResponse(result);

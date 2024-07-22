@@ -13,7 +13,7 @@ export class UpdateServicesUseCases {
         if (!request) {
             return new BaseResponse(null, 'Bad request', false, 400);
         }
-        let domain = ServiceMapperDTO.toDomain(request);
+        let domain = ServiceMapperDTO.toDomainUpdate(request);
         let result: Service | null = await this.repostory.update(uuid, domain);
         if (result) {
             let response = ServiceMapperDTO.toResponse(result);
