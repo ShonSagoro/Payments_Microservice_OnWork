@@ -1,11 +1,11 @@
 
 import { Request, Response } from "express";
 import { BaseResponse } from "../../../middleware/dtos/BaseResponse";
-import { GetPaymentsByUuidUserUseCase } from "../../application/use_cases/GetPaymentsByUuidUserUseCase";
+import { GetServicesByUuidUserUseCase } from "../../application/use_cases/GetServicesByUuidUserUseCase";
 
 
-export class GetPaymentsByUuidUserController {
-    constructor(readonly useCase: GetPaymentsByUuidUserUseCase) { }
+export class GetServicesByUuidUserController {
+    constructor(readonly useCase: GetServicesByUuidUserUseCase) { }
 
     async execute(req: Request, res: Response) {
         const { uuid } = req.params;

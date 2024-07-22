@@ -7,4 +7,5 @@ export interface ServiceInterface {
     delete(uuid: string): Promise<boolean>;
     list(): Promise<Service[]|null>;
     findByUUID(uuid: string): Promise<Service|null>;
+    findByUserUUID(uuid: string): Promise<Service[]|null>;
 }

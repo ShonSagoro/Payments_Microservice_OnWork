@@ -5,6 +5,16 @@ import ServiceEntity from "../daos/servicesEntity";
 import { ServiceMapperDAO } from "../mappers/ServiceMapperDAO";
 
 export class MysqlServiceRepository implements ServiceInterface {
+    
+    async findByUserUUID(uuid: string): Promise<Service[] | null> {
+        try {
+            const services = await ServiceEntity.findAll({ where: { user_uuid: uuid } });
+            return services.map(service => ServiceMapperDAO.toDomain(service));
+        } catch (error) {
+            console.error('Error finding services by user UUID:', error);
+            return null;
+        }
+    }
 
     async create(service: Service): Promise<Service | null> {
         try {

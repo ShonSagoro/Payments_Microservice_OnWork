@@ -10,6 +10,8 @@ import { DeleteServiceController } from '../controllers/DeleteServicesController
 import { GetByUuidServiceController } from '../controllers/GetByUuidServicesController';
 import { ListServiceController } from '../controllers/ListServicesController';
 import { UpdateServicesController } from '../controllers/UpdateServicesController';
+import { GetServicesByUuidUserUseCase } from '../../application/use_cases/GetServicesByUuidUserUseCase';
+import { GetServicesByUuidUserController } from '../controllers/GetServicesByUuidUserController';
 
 
 const repository = new MysqlServiceRepository();
@@ -19,9 +21,12 @@ export const deleteServiceUseCase = new DeleteServiceUseCase(repository);
 export const getByUuidServiceUseCase = new GetByUuidServiceUseCase(repository);
 export const listServiceUseCase = new ListServiceUseCase(repository);
 export const updateServicesUseCases = new UpdateServicesUseCases(repository);
+export const getServicesByUuidUserUseCase = new GetServicesByUuidUserUseCase(repository);
+
 
 export const createServiceController = new CreateServiceController(createServiceUseCases);
 export const deleteServiceController = new DeleteServiceController(deleteServiceUseCase);
 export const getByUuidServiceController = new GetByUuidServiceController(getByUuidServiceUseCase);
 export const listServiceController = new ListServiceController(listServiceUseCase);
 export const updateServicesController = new UpdateServicesController(updateServicesUseCases);
+export const getServicesByUuidUserController = new GetServicesByUuidUserController(getServicesByUuidUserUseCase)

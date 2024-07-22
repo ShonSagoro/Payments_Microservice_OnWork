@@ -9,8 +9,8 @@ import { DeletePaymentByUserUUIDController } from '../controllers/DeletePaymentB
 import { DeletePaymentController } from '../controllers/DeletePaymentController';
 import { GetByUuidPaymentController } from '../controllers/GetByUuidPaymentController';
 import { ListPaymentController } from '../controllers/ListPaymentController';
-import { GetPaymentsByUuidUserUseCase } from '../../application/use_cases/GetPaymentsByUuidUserUseCase';
 import { GetPaymentsByUuidUserController } from '../controllers/GetPaymentsByUuidUserController';
+import { GetPaymentsByUuidUserUseCase } from '../../application/use_cases/GetPaymentsByUuidUserUseCase';
 
 const repository = new MysqlPaymentRepository();
 
