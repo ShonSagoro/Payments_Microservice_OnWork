@@ -7,7 +7,8 @@ export class ServiceMapperDAO {
         let service = new Service(
             serviceEntity.dataValues.name,
             serviceEntity.dataValues.cost_per_service,
-            serviceEntity.dataValues.currency
+            serviceEntity.dataValues.currency,
+            serviceEntity.dataValues.provider_uuid
         );
         service.uuid = serviceEntity.dataValues.uuid;
         service.commission = serviceEntity.dataValues.commission;
@@ -31,7 +32,8 @@ export class ServiceMapperDAO {
             cost_per_service: service.cost_per_service,
             currency: service.currency,
             commission: service.commission,
-            cost_total: service.cost_total
+            cost_total: service.cost_total,
+            provider_uuid: service.provider_uuid
         });
     }
 }

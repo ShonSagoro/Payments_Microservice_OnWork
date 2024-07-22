@@ -9,6 +9,7 @@ class ServiceEntity extends Model {
     public cost_per_service!: number;
     public commission!: number; // Nota: Corregido de "commision" a "commission" para mantener la consistencia en la nomenclatura
     public cost_total!: number;
+    public provider_uuid!: string;
 }
 
 ServiceEntity.init(
@@ -36,6 +37,10 @@ ServiceEntity.init(
         },
         cost_total: {
             type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        provider_uuid: {
+            type: DataTypes.UUID,
             allowNull: false,
         },
     },

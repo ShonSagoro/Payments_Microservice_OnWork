@@ -8,7 +8,7 @@ export class MysqlServiceRepository implements ServiceInterface {
     
     async findByUserUUID(uuid: string): Promise<Service[] | null> {
         try {
-            const services = await ServiceEntity.findAll({ where: { user_uuid: uuid } });
+            const services = await ServiceEntity.findAll({ where: { provider_uuid: uuid } });
             return services.map(service => ServiceMapperDAO.toDomain(service));
         } catch (error) {
             console.error('Error finding services by user UUID:', error);

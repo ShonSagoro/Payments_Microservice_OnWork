@@ -15,15 +15,18 @@ export class Service implements ValidatableEntity {
 
     public commission:number;
 
+    public provider_uuid:string;
+
     public cost_total:number;
 
-    constructor(name: string, cost_per_service:number, currency: string) {
+    constructor(name: string, cost_per_service:number, currency: string, provider_uuid:string ) {
         this.uuid = uuidv4();
         this.name=name;
         this.cost_per_service=cost_per_service;
         this.currency=currency;
         this.commission=cost_per_service * this.extra_cost;
         this.cost_total=cost_per_service + this.commission;
+        this.provider_uuid=provider_uuid;        
     }
 
     async validate() {
