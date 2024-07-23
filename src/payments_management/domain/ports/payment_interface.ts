@@ -7,4 +7,5 @@ export interface PaymentInterface {
     list(): Promise<Payment[]|null>;
     findByUUID(uuid: string): Promise<Payment|null>;
     findByUserUUID(uuid: string): Promise<Payment[]>;
+    findByProviderUUID(uuid: string): Promise<Payment[]>;
 }

@@ -1,4 +1,5 @@
 import sequelize from "../../../database/mysqldb";
+import { StatusEnum } from "../../domain/entities/enums/StatusEnum";
 import { Payment } from "../../domain/entities/payment";
 import { PaymentInterface } from "../../domain/ports/payment_interface";
 import PaymentEntity from "../daos/paymentEntity";
@@ -6,7 +7,7 @@ import { PaymentMapperDAO } from "../mappers/PaymentMapperDAO";
 import { MysqlServiceRepository } from "./MysqlServiceRepository";
 
 export class MysqlPaymentRepository implements PaymentInterface {
-
+    
     private _serviceRepository: MysqlServiceRepository | null = null;
 
     get serviceRepository(): MysqlServiceRepository {
@@ -17,9 +18,46 @@ export class MysqlPaymentRepository implements PaymentInterface {
     }
 
 
+    async findByUserUUID(user_uuid: string): Promise<Payment[]> {
+        try {
+            const paymentEntities = await PaymentEntity.findAll({ where: { "user_uuid" : user_uuid } });
+            const payments: (Payment | null)[] = [];
+            for (const paymentEntity of paymentEntities) {
+                const service = await this.serviceRepository.findByUUID(paymentEntity.dataValues.service_uuid);
+                if (service) {
+                    const payment = PaymentMapperDAO.toDomain(paymentEntity, service);
+                    payments.push(payment);
+                }
+            }
+            return payments.filter(payment => payment !== null);
+        } catch (error) {
+            console.error('Error finding payments by user UUID:', error);
+            return [];
+        }
+    }
+
+    async findByProviderUUID(provider_uuid: string): Promise<Payment[]> {
+        try {
+            const paymentEntities = await PaymentEntity.findAll({ where: { "provider_uuid" : provider_uuid } });
+            const payments: (Payment | null)[] = [];
+            for (const paymentEntity of paymentEntities) {
+                const service = await this.serviceRepository.findByUUID(paymentEntity.dataValues.service_uuid);
+                if (service) {
+                    const payment = PaymentMapperDAO.toDomain(paymentEntity, service);
+                    payments.push(payment);
+                }
+            }
+            return payments.filter(payment => payment !== null);
+        } catch (error) {
+            console.error('Error finding payments by user UUID:', error);
+            return [];
+        }   
+     }
+
     async create(payment: Payment): Promise<Payment | null> {
         try {
             return await this.withTransaction(async (transaction: any) => {
+                payment.status=StatusEnum["APPROVED" as keyof typeof StatusEnum]
                 const paymentEntity = PaymentMapperDAO.toEntity(payment);
                 await paymentEntity.save({ transaction });
                 let service = await this.serviceRepository.findByUUID(payment.service.uuid);
@@ -92,24 +130,6 @@ export class MysqlPaymentRepository implements PaymentInterface {
         } catch (error) {
             console.error('Error listing payments:', error);
             return null;
-        }
-    }
-
-    async findByUserUUID(user_uuid: string): Promise<Payment[]> {
-        try {
-            const paymentEntities = await PaymentEntity.findAll({ where: { user_uuid } });
-            const payments: (Payment | null)[] = [];
-            for (const paymentEntity of paymentEntities) {
-                const service = await this.serviceRepository.findByUUID(paymentEntity.dataValues.service_uuid);
-                if (service) {
-                    const payment = PaymentMapperDAO.toDomain(paymentEntity, service);
-                    payments.push(payment);
-                }
-            }
-            return payments.filter(payment => payment !== null);
-        } catch (error) {
-            console.error('Error finding payments by user UUID:', error);
-            return [];
         }
     }
 

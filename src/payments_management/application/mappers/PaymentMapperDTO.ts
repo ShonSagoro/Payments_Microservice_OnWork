@@ -17,7 +17,7 @@ export class PaymentMapperDTO {
 
     static toResponse(domain: Payment): PaymentResposnse{
        let service_response = ServiceMapperDTO.toResponse(domain.service)
-        return new PaymentResposnse(domain.uuid, domain.user_uuid, domain.provider_uuid, service_response);
+        return new PaymentResposnse(domain.uuid, domain.user_uuid, domain.provider_uuid, service_response, domain.status.toString());
     }
 
     static toDomain(request: CreatePaymentRequest): Payment {

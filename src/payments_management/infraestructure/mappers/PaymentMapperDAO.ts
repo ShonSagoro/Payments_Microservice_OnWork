@@ -6,6 +6,7 @@ export class PaymentMapperDAO {
     static toDomain(paymentEntity: PaymentEntity, service: Service): Payment {
         let payment = new Payment(paymentEntity.dataValues.user_uuid, paymentEntity.dataValues.provider_uuid, service);
         payment.uuid = paymentEntity.dataValues.uuid;
+        payment.status = paymentEntity.dataValues.status;
         return payment;
     }
 

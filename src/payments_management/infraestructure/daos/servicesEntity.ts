@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../../../database/mysqldb';
-import PaymentEntity from './paymentEntity';
 
 class ServiceEntity extends Model {
     public uuid!: string;
